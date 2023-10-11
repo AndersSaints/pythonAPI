@@ -7,6 +7,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 db = SQLAlchemy(app)
 
+# $ python
+# >>> from project import app, db
+# >>> app.app_context().push()
+# >>> db.create_all()
+
 
 class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,7 +27,7 @@ def index():
     return 'Hello!'
 
 
-@app.route1('/drinks')
+@app.route('/drinks')
 def get_drinks():
 
     return {"drinks": "drink data"}
