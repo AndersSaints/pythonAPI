@@ -27,7 +27,7 @@ def index():
     return 'Hello!'
 
 
-@app.route('/drinks')
+@app.route('/drinks', methods=['GET'])
 def get_drinks():
     drinks = Drink.query.all()
 
@@ -39,7 +39,7 @@ def get_drinks():
     return {"drinks": output}
 
 
-@app.route('/drinks/<id>')
+@app.route('/drinks/<id>', methods=['GET'])
 def get_drink(id):
     drink = Drink.query.get_or_404(id)
     return {"name": drink.name, "description": drink.description}
@@ -52,6 +52,15 @@ def add_drink():
     db.session.add(drink)
     db.session.commit()
     return {'id': drink.id}
+
+
+# @app.route('/drinks/<id>', methods=['PUT'])
+# def update_drink(name, description):
+#     drink = Drink.query.update(name=request.json['name'],
+#                                description=request.json['description'])
+#     db.session.update(drink)
+#     db.session.commit()
+#     return {'id': drink.id}
 
 
 @app.route('/drinks/<id>', methods=['DELETE'])
